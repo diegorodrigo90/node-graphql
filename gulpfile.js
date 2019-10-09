@@ -1,6 +1,7 @@
 const { dest, src, series, parallel, watch } = require('gulp')
 const clean = require('gulp-clean')
 const ts = require('gulp-typescript')
+const camelcase = require('gulp-camelcase')
 
 const tsProject = ts.createProject('tsconfig.json')
 const watcher = watch(['src/**/*.*'], (clear, staticFiles, build))
@@ -8,7 +9,7 @@ const watcher = watch(['src/**/*.*'], (clear, staticFiles, build))
 function build () {
   const tsResult = tsProject.src().pipe(tsProject())
 
-  return tsResult.js.pipe(dest('dist'))
+  return tsResult.js.pipe(dest('dist')).pipe(camelcase())
 }
 
 function staticFiles () {

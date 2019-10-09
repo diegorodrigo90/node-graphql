@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
+const graphqlHTTP = require("express-graphql");
+const schema_1 = require("./graphql/schema");
 class App {
     constructor() {
         this.express = express();
@@ -8,11 +10,10 @@ class App {
     }
     middleware() {
         this.express.disable('x-powered-by');
-        this.express.use('/hello', (req, res, next) => {
-            res.send({
-                hello: "Hello world"
-            });
-        });
+        this.express.use('/graphql', graphqlHTTP({
+            schema: schema_1.default,
+            graphiql: process.env.NODE_ENV === 'development',
+        }));
     }
 }
 exports.default = new App().express;

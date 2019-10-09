@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "esnext",
+            "dom"
+        ],
+        "target": "es2020",
+        "module": "commonjs"
+    },
+    "compileOnSave": true,
+    "include": [
+        "src/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+    ]
+}
